@@ -29,7 +29,8 @@ class PluginFetchDigestFromDrupal extends AbstractFetchDigestPlugin
         if (isset($this->settings['drupal_baseurl'])) {
             $this->drupal_base_url = $this->settings['drupal_baseurl'];
         } else {
-            $this->drupal_base_url = 'http://localhost:8000';
+            // $this->drupal_base_url = 'http://localhost:8000';
+            $this->drupal_base_url = 'http://drupalvm.test/';
         }
         if (isset($this->settings['drupal_user'])) {
             $this->drupal_user = $this->settings['drupal_user'];
@@ -39,7 +40,8 @@ class PluginFetchDigestFromDrupal extends AbstractFetchDigestPlugin
         if (isset($this->settings['drupal_password'])) {
             $this->drupal_password = $this->settings['drupal_password'];
         } else {
-            $this->drupal_password = 'islandora';
+            // $this->drupal_password = 'islandora';
+            $this->drupal_password = 'admin';
         }
 
         if (isset($this->settings['fixity_algorithm'])) {
@@ -61,7 +63,6 @@ class PluginFetchDigestFromDrupal extends AbstractFetchDigestPlugin
 
         $get_digest_url = $this->drupal_base_url . '/islandora_riprap/checksum?file_uri=' .
             $resource_id . '&algorithm=' . $this->fixity_algorithm;
-
         $response = $client->request('GET', $get_digest_url, [
             'http_errors' => false,
             'auth' => [$this->drupal_user, $this->drupal_password]
