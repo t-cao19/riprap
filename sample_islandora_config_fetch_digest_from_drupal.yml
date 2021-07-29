@@ -21,29 +21,46 @@
 
 # thin: true
 # One of 'md5', 'sha1', or 'sha256'.
-fixity_algorithm: sha1
+# fixity_algorithm: "sha1"
+fixity_algorithm: "md5"
 
 # Absolute or relative to the Riprap application directory.
-failures_log_path: 'var/riprap_failed_events.log'
+failures_log_path: "/var/log/riprap_failed_events.log"
+
+# New setting/flag for checksum verification
+verify: true
 
 ###################
 # Plugin settings #
 ###################
 
 # Use this plugin if you want to use the 'Riprap resource (media) list' View provided by Islandora Riprap.
-plugins.fetchresourcelist: ['PluginFetchResourceListFromDrupalView']
-drupal_baseurl: 'http://localhost:8000'
+# plugins.fetchresourcelist: ["PluginFetchResourceListFromDrupalView"]
+plugins.fetchresourcelist: ["PluginFetchFileListFromDrupalView"]
+# drupal_baseurl: "http://localhost:8000"
+drupal_baseurl: "http://drupalvm.test"
 drupal_user: admin
-drupal_password: islandora
+drupal_password: admin
+# drupal_password: islandora
 # Absolute or relative to the Riprap application directory.
-views_pager_data_file_path: 'var/fetchresourcelist.from.drupal.pager.txt'
+views_pager_data_file_path: "var/fetchresourcelist.from.drupal.pager.txt"
+
+jsonapi_authorization_headers: ["Authorization: Basic YWRtaW46aXNsYW5kb3Jh"]
 
 # Required. Non-standard or custom media need to have the fieldname they use to contain the file added to this list.
-drupal_file_fieldnames: ['field_media_audio', 'field_media_document', 'field_edited_text', 'field_media_file', 'field_media_image', 'field_media_video_file']
+drupal_file_fieldnames:
+  [
+    "field_media_audio_file",
+    "field_media_document",
+    "field_media_image",
+    "field_media_video_file",
+  ]
 
 plugins.fetchdigest: PluginFetchDigestFromDrupal
 
 plugins.persist: PluginPersistToDatabase
 
-plugins.postcheck: ['PluginPostCheckCopyFailures']
+plugins.postcheck: ["PluginPostCheckCopyFailures"]
 
+# New plguin to verify Checksum
+plugins.verify: PluginVerifyChecksum

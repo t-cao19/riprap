@@ -110,6 +110,9 @@
     "monolog/monolog": {
         "version": "1.23.0"
     },
+    "mtdowling/jmespath.php": {
+        "version": "2.6.1"
+    },
     "nikic/php-parser": {
         "version": "v4.0.3"
     },

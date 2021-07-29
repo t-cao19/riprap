@@ -17,6 +17,7 @@ class PluginFetchDigestFromShellTest extends TestCase
 
     public function testPluginFetchDigestFromShell()
     {
+        // $settings = array('digest_command' => '/usr/local/bin/sha1sum');
         $settings = array('digest_command' => '/usr/bin/sha1sum');
         $plugin = new PluginFetchDigestFromShell($settings, null);
         $digest = $plugin->execute($this->sample_resource_id);

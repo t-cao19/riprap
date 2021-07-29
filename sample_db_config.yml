@@ -10,15 +10,16 @@ fixity_algorithm: SHA-1
 # Plugins #
 ###########
 
-plugins.fetchresourcelist: ['PluginFetchResourceListFromGlob']
+plugins.fetchresourcelist: ["PluginFetchResourceListFromGlob"]
 # Absolute or relative to the Riprap application directory.
-resource_dir_paths: ['resources/filesystemexample/resourcefiles']
+resource_dir_paths: ["resources/filesystemexample/resourcefiles"]
 
 plugins.fetchdigest: PluginFetchDigestFromShell
-digest_command: '/usr/bin/sha1sum'
+# digest_command: "/usr/local/bin/sha1sum"
+digest_command: "/usr/bin/sha1sum"
 
 plugins.persist: PluginPersistToDatabase
 
-plugins.postcheck: ['PluginPostCheckCopyFailures']
+plugins.postcheck: ["PluginPostCheckCopyFailures"]
 # Absolute or relative to the Riprap application directory.
-failures_log_path: '/tmp/riprap_failed_events.log'
+failures_log_path: "/tmp/riprap_failed_events.log"
