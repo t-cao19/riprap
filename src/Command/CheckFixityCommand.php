@@ -154,6 +154,22 @@ class CheckFixityCommand extends Command
                 continue;
             }
 
+            if(isset($this->settings['verify']) && $this->settings['verify']){
+                // Execute the verify plugin.
+                $this->verifyPlugin = $this->settings['plugins.verify'];
+                $verify_plugin_name = 'App\Plugin\\' . $this->verifyPlugin;
+                $verify_plugin = new $verify_plugin_name($this->settings, $this->logger);
+                $fits_equal = $verify_plugin->execute($resource_record->resource_id, $current_digest_value);
+
+                if(!$fits_equal){
+                    $outcome = 'fail';
+                    $event_detail = 'checksum does not match FITS checksum';
+                } else {
+                    $outcome = 'success';
+                    $event_detail = 'checksum matches FITS checksum';
+                }
+            }
+
             $event = new FixityCheckEvent();
             $event->setEventUuid($event_uuid);
             $event->setEventType('fix');
